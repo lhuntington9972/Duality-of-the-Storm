@@ -10,14 +10,19 @@ public class Lightning : MonoBehaviour
 	private float lightningCooldown;
 	private float lightningDuration;
 
-	public AudioSource lightningNoise;
+	public AudioSource lightningNoise1;
+	public AudioSource lightningNoise2;
+	public AudioSource lightningNoise3;
+
+	private AudioSource lightningNoise;
+	private int lightningPicker;
 
 	// Use this for initialization
 	void Start()
 	{
 		lighting = GetComponent<Light>();
 		lighting.enabled = false;
-		lightningCooldown = 10f;
+		lightningCooldown = 5f;
 		lightningDuration = 0.2f;
 		StartCoroutine(Lightnings());
 	}
@@ -38,6 +43,18 @@ public class Lightning : MonoBehaviour
 		{
 			yield return new WaitForSeconds(lightningCooldown);
 			lighting.enabled = !lighting.enabled;
+			lightningPicker = Random.Range(1, 4);
+			if (lightningPicker == 1)
+			{
+				lightningNoise = lightningNoise1;
+			}
+			else if (lightningPicker == 2)
+			{
+				lightningNoise = lightningNoise2;
+			} else if (lightningPicker == 3)
+            {
+				lightningNoise = lightningNoise3;
+            }
 			lightningNoise.Play(0);
 			yield return new WaitForSeconds(lightningDuration);
 			lighting.enabled = !lighting.enabled;
