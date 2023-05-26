@@ -18,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0)
         {
@@ -30,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
         if (move != Vector3.zero)
         {
             gameObject.transform.forward = move;
+            this.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
 
         // Changes the height position of the player..
